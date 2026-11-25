@@ -1,0 +1,7 @@
+<div class="page-top"><span class="step-tag">YOUR PERSONAL SPACE</span><span class="session-badge"><span class="status-dot" aria-hidden="true"></span> Signed in</span></div>
+<div class="welcome-icon" aria-hidden="true">✓</div>
+<header class="form-heading welcome-heading"><h2>You’re in, {{name}}.</h2><p>Welcome to your space. You’ve successfully signed in.</p></header>
+<div class="account-line"><span class="avatar" aria-hidden="true">✓</span><div><span class="field-label">SIGNED IN AS</span><p>{{email}}</p></div></div>
+<div class="session-note"><span class="tiny-lock" aria-hidden="true"></span><p>Two-step verification completed. You’ll be signed out after 15 minutes of inactivity, or when your session ends.</p></div>
+<p class="helper expiry-note">Session ends: <time datetime="{{expires}}" data-local-time>{{expires}}</time></p>
+<form method="post" action="/logout" class="auth-form" data-submit-label="Signing out…"><input type="hidden" name="csrf" value="{{csrf}}"><button class="primary-button" type="submit"><span>Sign out</span><span aria-hidden="true">↗</span></button></form>

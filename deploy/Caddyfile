@@ -1,0 +1,13 @@
+# Replace auth.example.com with your own hostname before deploying.
+# Run Caddy and Node on the SAME machine. Node binds only to loopback.
+auth.example.com {
+    request_body {
+        max_size 8KB
+    }
+    reverse_proxy 127.0.0.1:3000 {
+        header_up Host auth.example.com
+        header_up X-Forwarded-Proto https
+        header_up X-Real-IP {http.request.remote.host}
+        header_up -X-Forwarded-For
+    }
+}

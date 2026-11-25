@@ -1,0 +1,7 @@
+<div class="page-top"><span class="step-tag">KEEP A WAY BACK IN</span><span class="small-label">One last thing</span></div>
+<header class="form-heading"><h2>Save your backup codes.</h2><p>Lost your authenticator? A recovery code lets you sign in with your password.</p></header>
+{{message}}
+<ul class="recovery-codes" id="recovery-codes" aria-label="Your one-time recovery codes">{{code_list}}</ul>
+<button class="text-button copy-codes" type="button" data-copy="recovery-codes">Copy recovery codes</button>
+<p class="helper">{{saved_hint}} Each code works once. Store them somewhere private, separate from your password.</p>
+<form method="post" action="/recovery/continue" class="auth-form"><input type="hidden" name="csrf" value="{{csrf}}"><button class="primary-button" type="submit"><span>Continue to my space</span><span aria-hidden="true">→</span></button></form>

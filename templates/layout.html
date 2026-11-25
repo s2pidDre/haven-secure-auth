@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A simple, protected space to create your account and sign in.">
+  <title>{{title}} · Haven</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body data-page="{{page_name}}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main class="app-shell">
+    <aside class="brand-panel" aria-label="Haven">
+      <a class="brand" href="/" aria-label="Haven home"><span class="brand-mark" aria-hidden="true">h</span>haven<span class="brand-dot">.</span></a>
+      <div class="brand-story">
+        <p class="eyebrow">YOUR OWN LITTLE SPACE</p>
+        <h1>A safer start.<br>A simpler space.</h1>
+        <p class="brand-description">A place for you, with thoughtful protection at every step.</p>
+        <div class="illustration" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+          <div class="shield"><div class="shield-check"></div></div>
+          <div class="float-label"><span class="tiny-lock"></span> A little peace of mind.</div>
+        </div>
+      </div>
+      <div class="brand-bottom"><span class="status-dot" aria-hidden="true"></span> Made for a more secure hello.</div>
+    </aside>
+    <section class="content-panel" id="main-content" tabindex="-1">
+      <div class="content-inner">{{body}}{{security}}</div>
+      <footer class="page-footer"><span class="tiny-lock" aria-hidden="true"></span> Your connection is encrypted.</footer>
+    </section>
+  </main>
+  <div class="sr-only" id="announcement" aria-live="polite"></div>
+</body>
+</html>

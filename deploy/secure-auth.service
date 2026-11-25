@@ -1,0 +1,22 @@
+[Unit]
+Description=Haven secure authentication
+After=network.target
+
+[Service]
+Type=simple
+User=secureauth
+Group=secureauth
+WorkingDirectory=/opt/secure-auth
+ExecStart=/usr/bin/node /opt/secure-auth/server.mjs
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/secure-auth/data
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

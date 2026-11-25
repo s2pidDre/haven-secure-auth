@@ -1,0 +1,10 @@
+<div class="page-top"><span class="step-tag">TWO-STEP VERIFICATION</span><span class="small-label">A safer sign-in</span></div>
+<header class="form-heading"><h2>{{heading}}</h2><p>{{description}}</p></header>
+{{error}}{{enrollment}}
+<form method="post" action="/mfa" class="auth-form" data-submit-label="Verifying…">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <div class="form-field"><label for="code">{{code_label}}</label><input id="code" class="code-input" name="code" type="text" maxlength="32" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" aria-describedby="code-help" required><p class="helper" id="code-help">Codes refresh every 30 seconds. Use each code only once.</p></div>
+  {{recovery_switch}}
+  <button class="primary-button" type="submit"><span>{{button}}</span><span aria-hidden="true">→</span></button>
+</form>
+<form method="post" action="/logout" class="cancel-form"><input type="hidden" name="csrf" value="{{csrf}}"><button type="submit" class="text-button">Cancel and return to sign in</button></form>

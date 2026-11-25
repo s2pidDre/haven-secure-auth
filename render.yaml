@@ -1,0 +1,29 @@
+# No paid services, disks, custom domains, or expiring Render Postgres database.
+services:
+  - type: web
+    name: haven-secure-auth
+    runtime: node
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: npm ci --ignore-scripts --no-audit --no-fund && npm run ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.3
+      - key: NODE_ENV
+        value: production
+      - key: TRANSPORT
+        value: render-free
+      - key: HOST
+        value: 0.0.0.0
+      - key: APP_SECRET
+        generateValue: true
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: HIBP_CHECK
+        value: "false"

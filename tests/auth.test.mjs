@@ -74,6 +74,7 @@ test('Pages, asset references, POST forms, HTTPS headers, and cookie flags are p
   for (const flag of ['Secure', 'HttpOnly', 'SameSite=Strict', 'Path=/']) assert.ok(cookie.includes(flag));
   assert.ok(cookie.startsWith(`${COOKIE}=`)); assert.equal(cookie.includes('Domain='), false);
   assert.equal(response.headers['cache-control'], 'no-store'); assert.match(response.headers['content-security-policy'], /frame-ancestors 'none'/);
+  assert.equal(response.headers['referrer-policy'], 'same-origin', 'Native POST forms must retain their Origin without sending referrers to other sites');
   assert.match(response.headers['strict-transport-security'], /max-age/);
   for (const path of ['/register', '/css/style.css', '/js/main.js']) assert.equal((await browser.request(path)).status, 200);
   assert.equal((await browser.request('/logged-in')).headers.location, '/login');
@@ -85,7 +86,9 @@ test('CSRF, cross-origin, duplicate fields, content type, and size are enforced 
   const data = { csrf, email: 'person@example.com', password };
   assert.equal((await browser.request('/login', { method: 'POST', data: { ...data, csrf: 'wrong' } })).status, 403);
   assert.equal((await browser.request('/login', { method: 'POST', data, origin: false })).status, 403);
+  assert.equal((await browser.request('/login', { method: 'POST', data, headers: { Origin: 'null' } })).status, 403);
   assert.equal((await browser.request('/login', { method: 'POST', data, headers: { Origin: 'https://evil.example' } })).status, 403);
+  assert.equal((await browser.request('/login', { method: 'POST', data, headers: { 'Sec-Fetch-Site': 'cross-site' } })).status, 403);
   assert.equal((await browser.request('/login', { method: 'POST', raw: `csrf=${csrf}&csrf=${csrf}` })).status, 400);
   assert.equal((await browser.request('/login', { method: 'POST', data, headers: { 'Content-Type': 'application/json' } })).status, 415);
   assert.equal((await browser.request('/login', { method: 'POST', raw: 'x'.repeat(9000) })).status, 413);
